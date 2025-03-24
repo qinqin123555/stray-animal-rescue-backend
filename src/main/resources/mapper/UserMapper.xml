@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.strayanimalrescuebackend.mapper.UserMapper">
+
+    <!-- 查询用户名或邮箱是否已存在 -->
+    <select id="checkUserExists" resultType="int">
+        SELECT COUNT(*) FROM user WHERE username = #{username} OR email = #{email}
+    </select>
+
+    <!-- 插入新用户 -->
+    <insert id="registerUser" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO user (username, email, password_hash, role, phone, avatar_url)
+        VALUES (#{username}, #{email}, #{passwordHash}, 'USER', #{phone}, #{avatarUrl})
+    </insert>
+
+</mapper>
